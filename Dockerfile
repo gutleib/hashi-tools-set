@@ -31,10 +31,10 @@ RUN mv waypoint waypoint_src && cd waypoint_src && make bin && cp waypoint .. &&
 
 
 FROM ubuntu:jammy
-
-WORKDIR /hashitools
-
-COPY --from=builder /build/* /hashitools/
-
+LABEL maintainer="Gutleib <gutleib@gmail.com>"
+COPY --from=builder /build/* /usr/local/sbin/
+RUN adduser --disabled-password --gecos "" hashiuser
+USER hashiuser
+WORKDIR /home/hashiuser/
 
 
